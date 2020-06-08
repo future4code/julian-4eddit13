@@ -1,11 +1,19 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   PostCardContainer
 } from './style';
 
-const PostCard = () => {
+const PostCard = (props) => {
+
+  const history = useHistory();
+
+  const goToPostPage = (postId) => {
+    history.push(`/posts/${postId}`);
+  }
+
   return (
-    <PostCardContainer>
+    <PostCardContainer onClick={() => goToPostPage(props.post.id)} >
       PostCard
     </PostCardContainer>
   )
