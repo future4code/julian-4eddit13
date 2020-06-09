@@ -3,20 +3,42 @@ import logo from '../../img/labeddit.png';
 import { useHistory } from 'react-router-dom';
 import {
   HeaderContainer, 
-  ImageLogo
+  HeaderWrapper,
+  HeaderMenuWrapper,
+  ImageLogo,
+  HeaderButton
 } from './style';
 
 const Header = () => {
 
   const history = useHistory();
 
-  const goToHomePage = () => {
+  const token = window.localStorage.getItem('token');
+
+  const username = window.localStorage.getItem('username');
+
+  const goToFeedPage = () => {
+    history.push('/home');
+  }
+
+  const logOut = () => {
+    window.localStorage.clear();
     history.push('/');
   }
 
   return (
     <HeaderContainer>
-      <ImageLogo src={logo} alt='logo' onClick={goToHomePage} />
+      <HeaderWrapper>
+        <ImageLogo src={logo} alt='logo' onClick={goToFeedPage} />
+        <HeaderMenuWrapper>
+          {token ? (
+            <div>
+              <p>Olá, {username}</p>
+              <HeaderButton onClick={logOut} >Logout</HeaderButton>
+            </div>
+          ) : null}
+        </HeaderMenuWrapper>
+      </HeaderWrapper>
     </HeaderContainer>
   )
 }

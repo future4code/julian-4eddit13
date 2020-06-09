@@ -9,7 +9,7 @@ const PostCard = (props) => {
   const history = useHistory();
 
   const goToPostPage = (postId) => {
-    history.push(`/posts/${postId}`);
+    history.push(`/${postId}`);
   }
 
   return (

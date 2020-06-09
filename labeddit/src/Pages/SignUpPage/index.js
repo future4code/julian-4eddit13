@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   SignUpPageContainer,
-  SignUpFormContainer
+  SignUpFormContainer,
+  SignUpFormControl,
+  SignUpTextField,
+  SignUpButtonWrapper,
+  SignUpButton
 } from './style';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useForm } from '../../hooks/useForm';
+import { UrlContext } from '../../contexts/UrlContext';
 import axios from 'axios';
 
 const SignUpPage = (props) => {
@@ -17,7 +22,7 @@ const SignUpPage = (props) => {
     username: ''
   })
 
-  const { email, password } = form;
+  const { email, password, username } = form;
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -27,31 +32,63 @@ const SignUpPage = (props) => {
 
   const history = useHistory();
 
+  const baseUrl = useContext(UrlContext);
+
   const goToPrivateArea = (event) => {
     event.preventDefault();
-    history.push('/posts');
-    // const body = {
-    //   'email': email,
-    //   'password': password,
-    //   'username': username
-    // }
-    // axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/signup`, body)
-    // .then(response => {
-    //   window.localStorage.setItem('token', response.data.token);
-    //   history.push('/posts');
-    //   resetForm();
-    // })
-    // .catch(error => {
-    //   console.log(error);
-    //   window.alert('Não foi possível acessar')
-    // })
+    history.push('/home');
+    const body = {
+      'email': email,
+      'password': password,
+      'username': username
+    }
+    axios.post(`${baseUrl}/signup`, body)
+    .then(response => {
+      window.localStorage.setItem('token', response.data.token);
+      window.localStorage.setItem('username', response.data.user.username);
+      history.push('/home');
+      resetForm();
+    })
+    .catch(error => {
+      console.log(error);
+      window.alert('Não foi possível acessar')
+    })
   }
 
   return (
     <SignUpPageContainer>
       <Header />
       <SignUpFormContainer onSubmit={goToPrivateArea} >
-        <button type='submit' >Acessar</button>
+        <SignUpFormControl>
+          <SignUpTextField 
+            name='username'
+            value={username}
+            label={'Nome de usuário'}
+            onChange={handleInputChange}
+            type='text'
+          />
+        </SignUpFormControl>
+        <SignUpFormControl>
+          <SignUpTextField 
+            name='email'
+            value={email}
+            label={'E-mail'}
+            onChange={handleInputChange}
+            type='email'
+          />
+        </SignUpFormControl>
+        <SignUpFormControl>
+          <SignUpTextField 
+            name='password'
+            value={password}
+            label={'Senha'}
+            onChange={handleInputChange}
+            type='password'
+          />
+        </SignUpFormControl>
+        <SignUpButtonWrapper>
+          <SignUpButton type='submit' >Acessar</SignUpButton>
+        </SignUpButtonWrapper>
       </SignUpFormContainer>
       <Footer />
     </SignUpPageContainer>

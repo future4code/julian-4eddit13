@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   LoginPageContainer,
-  LoginFormContainer
+  LoginFormContainer,
+  LoginFormControl,
+  LoginTextField,
+  LoginButtonWrapper,
+  LoginButton
 } from './style';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import { useForm } from '../../hooks/useForm';
+import { UrlContext } from '../../contexts/UrlContext';
 import axios from 'axios';
 
 const LoginPage = (props) => {
@@ -26,23 +31,34 @@ const LoginPage = (props) => {
 
   const history = useHistory();
 
+  const baseUrl = useContext(UrlContext);
+
+  useEffect(() => {
+    const token = window.localStorage.getItem('token');
+
+    if (token) {
+      history.push('/home');
+    }
+  }, [history]);
+
   const goToPrivateArea = (event) => {
     event.preventDefault();
-    history.push('/posts');
-    // const body = {
-    //   'email': email,
-    //   'password': password
-    // }
-    // axios.post(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/login`, body)
-    // .then(response => {
-    //   window.localStorage.setItem('token', response.data.token);
-    //   history.push('/posts');
-    //   resetForm();
-    // })
-    // .catch(error => {
-    //   console.log(error);
-    //   window.alert('Não foi possível acessar')
-    // })
+    history.push('/home');
+    const body = {
+      'email': email,
+      'password': password
+    }
+    axios.post(`${baseUrl}/login`, body)
+    .then(response => {
+      window.localStorage.setItem('token', response.data.token);
+      window.localStorage.setItem('username', response.data.user.username);
+      history.push('/home');
+      resetForm();
+    })
+    .catch(error => {
+      console.log(error);
+      window.alert('Não foi possível acessar')
+    })
   }
 
   const goToSignUp = () => {
@@ -53,8 +69,28 @@ const LoginPage = (props) => {
     <LoginPageContainer>
       <Header />
       <LoginFormContainer onSubmit={goToPrivateArea} >
-        <button type='submit' >Acessar</button>
-        <button onClick={goToSignUp} >Cadastrar</button>
+        <LoginFormControl>
+          <LoginTextField 
+            name='email'
+            value={email}
+            label={'E-mail'}
+            onChange={handleInputChange}
+            type='email'
+          />
+        </LoginFormControl>
+        <LoginFormControl>
+          <LoginTextField 
+            name='password'
+            value={password}
+            label={'Senha'}
+            onChange={handleInputChange}
+            type='password'
+          />
+        </LoginFormControl>
+        <LoginButtonWrapper>
+          <LoginButton type='submit' >Acessar</LoginButton>
+          <LoginButton onClick={goToSignUp} >Cadastrar</LoginButton>
+        </LoginButtonWrapper>
       </LoginFormContainer>
       <Footer />
     </LoginPageContainer>
