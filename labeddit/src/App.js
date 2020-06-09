@@ -1,15 +1,12 @@
 import React from 'react';
-import styled from 'styled-components';
+import { UrlContext } from './contexts/UrlContext';
 import Router from './Router';
-
-const AppContainer = styled.div`
-`
 
 function App() {
   return (
-    <AppContainer>
+    <UrlContext.Provider value={'https://us-central1-labenu-apis.cloudfunctions.net/labEddit'}>
       <Router />
-    </AppContainer>
+    </UrlContext.Provider>
   );
 }
 

@@ -15,10 +15,10 @@ const Router = () => {
         <Route exact path='/signup'>
           <SignUpPage />
         </Route>
-        <Route exact path='/posts'>
+        <Route exact path='/home'>
           <FeedPage />
         </Route>
-        <Route exact path='/posts/:postId'>
+        <Route exact path='/:postId'>
           <PostPage />
         </Route>
       </Switch>

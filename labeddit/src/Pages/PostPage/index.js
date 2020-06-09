@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
   PostPageContainer
@@ -8,6 +8,7 @@ import Footer from '../../components/Footer';
 import PostCard from '../../components/PostCard';
 import CommentCard from '../../components/CommentCard';
 import { usePrivatePage } from '../../hooks/usePrivatePage';
+import { UrlContext } from '../../contexts/UrlContext';
 import axios from 'axios';
 
 const PostPage = (props) => {
@@ -18,8 +19,10 @@ const PostPage = (props) => {
 
   const history = useHistory();
 
+  const baseUrl = useContext(UrlContext);
+
   useEffect(() => {
-    axios.get(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${pathParams.postId}`, {
+    axios.get(`${baseUrl}/posts/${pathParams.postId}`, {
       headers: {
         Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTE2MjI0OTd9.4Bewo-Gklruzd8WpyiC6N9Vb7_95TMSPgyZ_3UzWW3k'
       }
