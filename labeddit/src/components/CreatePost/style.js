@@ -28,5 +28,5 @@ export const CreatePostTextfield = styled(TextField)`
 `
 
 export const CreatePostButton = styled(Button)`
-  width: 100px;
+  width: 150px;
 `
