@@ -19,7 +19,7 @@ const LoginPage = (props) => {
   const { form, onChange, resetForm } = useForm({
     email: '',
     password: ''
-  })
+  });
 
   const { email, password } = form;
 
@@ -43,7 +43,6 @@ const LoginPage = (props) => {
 
   const goToPrivateArea = (event) => {
     event.preventDefault();
-    history.push('/home');
     const body = {
       'email': email,
       'password': password
@@ -76,6 +75,7 @@ const LoginPage = (props) => {
             label={'E-mail'}
             onChange={handleInputChange}
             type='email'
+            required
           />
         </LoginFormControl>
         <LoginFormControl>
@@ -85,6 +85,7 @@ const LoginPage = (props) => {
             label={'Senha'}
             onChange={handleInputChange}
             type='password'
+            required
           />
         </LoginFormControl>
         <LoginButtonWrapper>
