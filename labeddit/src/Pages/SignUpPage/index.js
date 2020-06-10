@@ -36,7 +36,6 @@ const SignUpPage = (props) => {
 
   const goToPrivateArea = (event) => {
     event.preventDefault();
-    history.push('/home');
     const body = {
       'email': email,
       'password': password,
