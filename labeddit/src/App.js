@@ -4,9 +4,9 @@ import Router from './Router';
 
 function App() {
   return (
-    <UrlContext.Provider value={'https://us-central1-labenu-apis.cloudfunctions.net/labEddit'}>
+    // <UrlContext.Provider value={'https://us-central1-labenu-apis.cloudfunctions.net/labEddit'}>
       <Router />
-    </UrlContext.Provider>
+    // </UrlContext.Provider>
   );
 }
 

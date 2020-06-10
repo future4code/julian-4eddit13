@@ -13,6 +13,19 @@ import Footer from '../../components/Footer';
 import { useForm } from '../../hooks/useForm';
 import { UrlContext } from '../../contexts/UrlContext';
 import axios from 'axios';
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+
+const MyTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#71EB1E",
+    },
+    secondary: {
+      main: "#ff9800",
+    },
+  },
+});
 
 const LoginPage = (props) => {
 
@@ -67,32 +80,50 @@ const LoginPage = (props) => {
 
   return (
     <LoginPageContainer>
+      <MuiThemeProvider theme={MyTheme}>
       <Header />
       <LoginFormContainer onSubmit={goToPrivateArea} >
         <LoginFormControl>
           <LoginTextField 
+            color="secondary"
             name='email'
             value={email}
             label={'E-mail'}
             onChange={handleInputChange}
             type='email'
+            
           />
         </LoginFormControl>
         <LoginFormControl>
           <LoginTextField 
+            color="secondary"
             name='password'
             value={password}
             label={'Senha'}
             onChange={handleInputChange}
             type='password'
+            
           />
         </LoginFormControl>
         <LoginButtonWrapper>
-          <LoginButton type='submit' >Acessar</LoginButton>
-          <LoginButton onClick={goToSignUp} >Cadastrar</LoginButton>
+          <Button 
+            color="secondary"
+            onClick={goToSignUp} 
+            >Cadastrar
+          </Button>
+          
+          <LoginButton 
+            type='submit' 
+            size='small'
+            variant="contained"
+            color="secondary"
+            >Acessar
+          </LoginButton>
+          
         </LoginButtonWrapper>
       </LoginFormContainer>
       <Footer />
+      </MuiThemeProvider>
     </LoginPageContainer>
   )
 }

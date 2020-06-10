@@ -13,6 +13,21 @@ import Footer from '../../components/Footer';
 import { useForm } from '../../hooks/useForm';
 import { UrlContext } from '../../contexts/UrlContext';
 import axios from 'axios';
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+
+
+const MyTheme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#71EB1E",
+    },
+    secondary: {
+      main: "#ff9800",
+    },
+  },
+});
+
 
 const SignUpPage = (props) => {
 
@@ -57,10 +72,12 @@ const SignUpPage = (props) => {
 
   return (
     <SignUpPageContainer>
+      <MuiThemeProvider theme={MyTheme}>  
       <Header />
       <SignUpFormContainer onSubmit={goToPrivateArea} >
         <SignUpFormControl>
           <SignUpTextField 
+            color="secondary"
             name='username'
             value={username}
             label={'Nome de usuário'}
@@ -70,6 +87,7 @@ const SignUpPage = (props) => {
         </SignUpFormControl>
         <SignUpFormControl>
           <SignUpTextField 
+            color="secondary"
             name='email'
             value={email}
             label={'E-mail'}
@@ -79,6 +97,7 @@ const SignUpPage = (props) => {
         </SignUpFormControl>
         <SignUpFormControl>
           <SignUpTextField 
+            color="secondary"
             name='password'
             value={password}
             label={'Senha'}
@@ -87,10 +106,17 @@ const SignUpPage = (props) => {
           />
         </SignUpFormControl>
         <SignUpButtonWrapper>
-          <SignUpButton type='submit' >Acessar</SignUpButton>
+          <Button 
+            size='small'
+            variant="contained" 
+            color="secondary" 
+            type='submit' 
+            >Acessar
+          </Button>
         </SignUpButtonWrapper>
       </SignUpFormContainer>
       <Footer />
+      </MuiThemeProvider>
     </SignUpPageContainer>
   )
 }

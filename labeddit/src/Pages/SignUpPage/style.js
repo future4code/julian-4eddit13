@@ -22,5 +22,6 @@ export const SignUpButtonWrapper = styled.div`
   align-items: flex-end;
   flex-direction: column;
   width: 250px;
+  padding: 4px;
 `
 export const SignUpButton = styled(Button)``

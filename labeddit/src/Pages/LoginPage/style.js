@@ -22,6 +22,8 @@ export const LoginButtonWrapper = styled.div`
   align-items: flex-end;
   flex-direction: column;
   width: 250px;
+  padding: 4px;
 `
 export const LoginButton = styled(Button)`
+ 
 `
