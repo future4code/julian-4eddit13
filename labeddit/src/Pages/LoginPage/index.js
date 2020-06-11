@@ -90,18 +90,18 @@ const LoginPage = (props) => {
         </LoginFormControl>
         <LoginButtonWrapper>
           <LoginButton 
-            color="secondary"
-            onClick={goToSignUp} 
-          >
-            Cadastrar
-          </LoginButton>
-          <LoginButton 
             type='submit' 
             size='small'
             variant="contained"
             color="secondary"
           >
             Acessar
+          </LoginButton>
+          <LoginButton 
+            color="secondary"
+            onClick={goToSignUp} 
+          >
+            Cadastrar
           </LoginButton>
           
         </LoginButtonWrapper>

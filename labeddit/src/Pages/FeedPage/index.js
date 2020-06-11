@@ -39,9 +39,7 @@ const FeedPage = (props) => {
       <Header />
       <FeedPageWrapper>
         <CreatePost />
-        {postsList.map(post => {
-          return <PostCard key={post.id} post={post} />
-        })}
+        {postsList.map(post => (<PostCard key={post.id} post={post} />))}
       </FeedPageWrapper>
       <Footer />
     </FeedPageContainer>
