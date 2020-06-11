@@ -16,6 +16,7 @@ const FeedPage = (props) => {
   usePrivatePage();
 
   const [postsList, setPostsList] = useState([]);
+  const [refreshList, setRefreshList] = useState(false) // Variável que altera que chama a requisição do useEffect quando o botão de like e deslike é clicado.
 
   const baseUrl = useContext(UrlContext);
 
@@ -32,14 +33,14 @@ const FeedPage = (props) => {
     .catch(error => {
       console.log(error);
     })
-  }, [setPostsList, baseUrl])
+  }, [setPostsList, baseUrl, refreshList])
 
   return (
     <FeedPageContainer>
       <Header />
       <FeedPageWrapper>
         <CreatePost />
-        {postsList.map(post => (<PostCard key={post.id} post={post} />))}
+        {postsList.map(post => (<PostCard key={post.id} post={post} refreshList={refreshList} setRefreshList={setRefreshList}/>))}
       </FeedPageWrapper>
       <Footer />
     </FeedPageContainer>
