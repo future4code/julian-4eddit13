@@ -1,20 +1,23 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
-  PostCardContainer
+  PostCardContainer,
+  PostCardTitle,
+  PostCardInteractionWrapper,
+  PostCardVoteWrapper,
+  PostCardCommentWrapper,
+  PostCardIconButton,
+  ThumbUpIcon,
+  ThumbDownIcon
 } from './style';
-import Button from "@material-ui/core/Button";
-import axios from 'axios'
 import { UrlContext } from '../../contexts/UrlContext';
-
-
+import axios from 'axios';
 
 const PostCard = (props) => {
   
-  const [direction, setDirection] = useState(0);
-  
-  
   const { id, title, text, username, votesCount, commentsCount, userVoteDirection, createdAt } = props.post;
+
+  const [refresh, setRefresh] = props.refreshArray;
 
   const history = useHistory();
 
@@ -24,47 +27,52 @@ const PostCard = (props) => {
 
   const baseUrl = useContext(UrlContext);
 
-  const likeAndDeslike = signal => {
-    const token = window.localStorage.getItem('token') 
-    signal === "+" ? setDirection( 1 ) : setDirection(- 1) 
-    console.log(direction)
+  const addVote = direction => {
+    const token = window.localStorage.getItem('token'); 
     const body = {
-      "direction": direction
+      "direction": (userVoteDirection === 0 ? direction : direction - userVoteDirection)
     }
     axios.put(`${baseUrl}/posts/${id}/vote`, body, {
       headers: {
         Authorization: token
       }
-    }).then((response) => {
-      props.setRefreshList(!props.refreshList)
-      console.log(response)
-    }).catch((err) => {
-      console.error(err)
     })
-
+    .then((response) => {
+      setRefresh(!refresh)
+      console.log(response)
+    })
+    .catch((error) => {
+      console.error(error)
+    })
   };
 
   return (
 
     <PostCardContainer >
-      <h3 onClick={() => goToPostPage(id)} >{username} - {title}</h3>
+      <PostCardTitle onClick={() => goToPostPage(id)} >{username} - {title}</PostCardTitle>
       <p>{text}</p>
-      
-      <Button 
-        onClick={() => likeAndDeslike("-")}
-        size='small'
-        variant="contained" 
-        color="secondary">
-         Deslike
-      </Button>
-      {votesCount}
-      <Button 
-        onClick={() => likeAndDeslike("+")}
-        size='small'
-        variant="contained" 
-        color="primary">
-        like
-      </Button>
+      <PostCardInteractionWrapper>
+        <PostCardVoteWrapper>
+          <PostCardIconButton 
+            onClick={() => addVote(-1)}
+            size='small'
+            color='secondary'
+          >
+            <ThumbDownIcon />
+          </PostCardIconButton>
+          {votesCount}
+          <PostCardIconButton 
+            onClick={() => addVote(1)}
+            size='small'
+            color='primary'
+          >
+            <ThumbUpIcon />
+          </PostCardIconButton>
+        </PostCardVoteWrapper>
+        <PostCardCommentWrapper>
+          {commentsCount} {commentsCount > 1 ? 'Comentários' : 'Comentário'}
+        </PostCardCommentWrapper>
+      </PostCardInteractionWrapper>
     </PostCardContainer>
   )
 }

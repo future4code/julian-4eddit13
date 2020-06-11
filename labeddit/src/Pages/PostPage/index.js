@@ -19,6 +19,10 @@ const PostPage = (props) => {
 
   const [postDetail, setPostDetail] = useState({});
 
+  const [refresh, setRefresh] = useState(false) // Variável que altera que chama a requisição do useEffect quando o botão de like e deslike é clicado.
+
+  const refreshArray = [refresh, setRefresh];
+
   const pathParams = useParams();
 
   const history = useHistory();
@@ -40,15 +44,17 @@ const PostPage = (props) => {
     .catch(error => {
       console.log(error);
     })
-  }, [])
+  }, [baseUrl, setPostDetail, refresh])
 
   return (
     <PostPageContainer>
       <Header />
       <PostPageWrapper>
-        <PostCard post={postDetail} />
+        <PostCard post={postDetail} refreshArray={refreshArray} />
         <CreateComment postId={pathParams.postId} />
-        {(comments || []).map(comment => (<CommentCard key={comment.id} comment={comment} />))}
+        {(comments || []).map(comment => (
+          <CommentCard key={comment.id} comment={comment} postId={pathParams.postId} refreshArray={refreshArray} />
+        ))}
       </PostPageWrapper>
       <Footer />
     </PostPageContainer>
