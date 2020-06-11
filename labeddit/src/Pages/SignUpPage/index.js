@@ -71,7 +71,9 @@ const SignUpPage = (props) => {
 
   return (
     <SignUpPageContainer>
-      <MuiThemeProvider theme={MyTheme}>
+
+      <MuiThemeProvider theme={MyTheme}>  
+
       <Header />
       <SignUpFormContainer onSubmit={goToPrivateArea} >
         <SignUpFormControl>
@@ -105,6 +107,7 @@ const SignUpPage = (props) => {
           />
         </SignUpFormControl>
         <SignUpButtonWrapper>
+
           <SignUpButton 
             type='submit' 
             size='small'

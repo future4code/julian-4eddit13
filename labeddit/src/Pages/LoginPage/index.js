@@ -16,7 +16,6 @@ import axios from 'axios';
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
-
 const MyTheme = createMuiTheme({
   palette: {
     primary: {
@@ -27,7 +26,6 @@ const MyTheme = createMuiTheme({
     },
   },
 });
-
 
 const LoginPage = (props) => {
 
@@ -81,51 +79,51 @@ const LoginPage = (props) => {
 
   return (
     <LoginPageContainer>
-    <MuiThemeProvider theme={MyTheme}>
-    <Header />
-    <LoginFormContainer onSubmit={goToPrivateArea} >
-      <LoginFormControl>
-        <LoginTextField 
-          color="secondary"
-          name='email'
-          value={email}
-          label={'E-mail'}
-          onChange={handleInputChange}
-          type='email'
+      <MuiThemeProvider theme={MyTheme}>
+      <Header />
+      <LoginFormContainer onSubmit={goToPrivateArea} >
+        <LoginFormControl>
+          <LoginTextField 
+            color="secondary"
+            name='email'
+            value={email}
+            label={'E-mail'}
+            onChange={handleInputChange}
+            type='email'
+            
+          />
+        </LoginFormControl>
+        <LoginFormControl>
+          <LoginTextField 
+            color="secondary"
+            name='password'
+            value={password}
+            label={'Senha'}
+            onChange={handleInputChange}
+            type='password'
+            
+          />
+        </LoginFormControl>
+        <LoginButtonWrapper>
+          <Button 
+            color="secondary"
+            onClick={goToSignUp} 
+            >Cadastrar
+          </Button>
           
-        />
-      </LoginFormControl>
-      <LoginFormControl>
-        <LoginTextField 
-          color="secondary"
-          name='password'
-          value={password}
-          label={'Senha'}
-          onChange={handleInputChange}
-          type='password'
+          <LoginButton 
+            type='submit' 
+            size='small'
+            variant="contained"
+            color="secondary"
+            >Acessar
+          </LoginButton>
           
-        />
-      </LoginFormControl>
-      <LoginButtonWrapper>
-        <Button 
-          color="secondary"
-          onClick={goToSignUp} 
-          >Cadastrar
-        </Button>
-        
-        <LoginButton 
-          type='submit' 
-          size='small'
-          variant="contained"
-          color="secondary"
-          >Acessar
-        </LoginButton>
-        
-      </LoginButtonWrapper>
-    </LoginFormContainer>
-    <Footer />
-    </MuiThemeProvider>
-  </LoginPageContainer>
+        </LoginButtonWrapper>
+      </LoginFormContainer>
+      <Footer />
+      </MuiThemeProvider>
+    </LoginPageContainer>
   )
 }
 
