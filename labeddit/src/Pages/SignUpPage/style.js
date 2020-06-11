@@ -6,8 +6,14 @@ import {
 } from '@material-ui/core';
 
 export const SignUpPageContainer = styled.div`
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `
 export const SignUpFormContainer = styled.form`
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;

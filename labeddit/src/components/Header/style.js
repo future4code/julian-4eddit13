@@ -5,10 +5,11 @@ import {
 
 export const HeaderContainer = styled.header`
   height: 100px;
+  width: 100%;
   display: flex;
   align-items: center;
-    color: black;
-    background-color: #ff9800 ;
+  color: black;
+  background-color: #ff9800 ;
 `
 export const HeaderWrapper = styled.div`
   width: 90%;

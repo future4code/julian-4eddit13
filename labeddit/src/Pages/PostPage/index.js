@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import {
-  PostPageContainer
+  PostPageContainer,
+  PostPageWrapper
 } from './style';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -24,6 +25,8 @@ const PostPage = (props) => {
 
   const baseUrl = useContext(UrlContext);
 
+  const { comments } = postDetail;
+
   useEffect(() => {
     const token = window.localStorage.getItem('token');
     axios.get(`${baseUrl}/posts/${pathParams.postId}`, {
@@ -42,8 +45,11 @@ const PostPage = (props) => {
   return (
     <PostPageContainer>
       <Header />
-      <PostCard post={postDetail} />
-      <CreateComment postId={pathParams.postId} />
+      <PostPageWrapper>
+        <PostCard post={postDetail} />
+        <CreateComment postId={pathParams.postId} />
+        {(comments || []).map(comment => (<CommentCard key={comment.id} comment={comment} />))}
+      </PostPageWrapper>
       <Footer />
     </PostPageContainer>
   )

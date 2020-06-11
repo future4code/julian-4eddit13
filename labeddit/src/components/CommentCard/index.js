@@ -3,10 +3,13 @@ import {
   CommentCardContainer
 } from './style';
 
-const CommentCard = () => {
+const CommentCard = (props) => {
+
+  const { id, text, username, votesCount, createdAt, userVoteDirection } = props.comment
+
   return (
     <CommentCardContainer>
-      CommentCard
+      <p>{username} - {text}</p>
     </CommentCardContainer>
   )
 }
