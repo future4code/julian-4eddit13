@@ -6,6 +6,8 @@ import {
 
 const PostCard = (props) => {
 
+  const { id, title, text, username, votesCount, commentsCount, userVoteDirection, createdAt } = props.post;
+
   const history = useHistory();
 
   const goToPostPage = (postId) => {
@@ -13,8 +15,9 @@ const PostCard = (props) => {
   }
 
   return (
-    <PostCardContainer onClick={() => goToPostPage(props.post.id)} >
-      PostCard
+    <PostCardContainer onClick={() => goToPostPage(id)} >
+      <h3>{username} - {title}</h3>
+      <p>{text}</p>
     </PostCardContainer>
   )
 }

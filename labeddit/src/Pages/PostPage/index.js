@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PostCard from '../../components/PostCard';
 import CommentCard from '../../components/CommentCard';
+import CreateComment from '../../components/CreateComment';
 import { usePrivatePage } from '../../hooks/usePrivatePage';
 import { UrlContext } from '../../contexts/UrlContext';
 import axios from 'axios';
@@ -22,9 +23,10 @@ const PostPage = (props) => {
   const baseUrl = useContext(UrlContext);
 
   useEffect(() => {
+    const token = window.localStorage.getItem('token');
     axios.get(`${baseUrl}/posts/${pathParams.postId}`, {
       headers: {
-        Authorization: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImV5dEdONkVTcGlVdDgweFgwbzBWIiwidXNlcm5hbWUiOiJkYXJ2YXMiLCJlbWFpbCI6InBlZHJvLmRhcnZhc0BnbWFpbC5jb20iLCJpYXQiOjE1OTE2MjI0OTd9.4Bewo-Gklruzd8WpyiC6N9Vb7_95TMSPgyZ_3UzWW3k'
+        Authorization: token
       }
     })
     .then(response => {
@@ -38,7 +40,8 @@ const PostPage = (props) => {
   return (
     <PostPageContainer>
       <Header />
-      {postDetail.title}
+      <PostCard post={postDetail} />
+      <CreateComment postId={pathParams.postId} />
       <Footer />
     </PostPageContainer>
   )

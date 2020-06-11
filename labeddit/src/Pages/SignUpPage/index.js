@@ -51,7 +51,6 @@ const SignUpPage = (props) => {
 
   const goToPrivateArea = (event) => {
     event.preventDefault();
-    history.push('/home');
     const body = {
       'email': email,
       'password': password,
@@ -72,7 +71,9 @@ const SignUpPage = (props) => {
 
   return (
     <SignUpPageContainer>
+
       <MuiThemeProvider theme={MyTheme}>  
+
       <Header />
       <SignUpFormContainer onSubmit={goToPrivateArea} >
         <SignUpFormControl>
@@ -106,13 +107,14 @@ const SignUpPage = (props) => {
           />
         </SignUpFormControl>
         <SignUpButtonWrapper>
-          <Button 
-            size='small'
-            variant="contained" 
-            color="secondary" 
+
+          <SignUpButton 
             type='submit' 
-            >Acessar
-          </Button>
+            size='small'
+            variant="contained"
+            color="secondary">
+              Acessar
+          </SignUpButton>
         </SignUpButtonWrapper>
       </SignUpFormContainer>
       <Footer />

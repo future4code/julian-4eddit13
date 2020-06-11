@@ -32,7 +32,7 @@ const LoginPage = (props) => {
   const { form, onChange, resetForm } = useForm({
     email: '',
     password: ''
-  })
+  });
 
   const { email, password } = form;
 
@@ -56,7 +56,6 @@ const LoginPage = (props) => {
 
   const goToPrivateArea = (event) => {
     event.preventDefault();
-    history.push('/home');
     const body = {
       'email': email,
       'password': password
