@@ -14,6 +14,8 @@ import axios from 'axios';
 
 const PostPage = (props) => {
 
+  usePrivatePage();
+
   const [postDetail, setPostDetail] = useState({});
 
   const pathParams = useParams();

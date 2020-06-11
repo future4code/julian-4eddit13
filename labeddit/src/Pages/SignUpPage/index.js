@@ -13,21 +13,6 @@ import Footer from '../../components/Footer';
 import { useForm } from '../../hooks/useForm';
 import { UrlContext } from '../../contexts/UrlContext';
 import axios from 'axios';
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-
-
-const MyTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#71EB1E",
-    },
-    secondary: {
-      main: "#ff9800",
-    },
-  },
-});
-
 
 const SignUpPage = (props) => {
 
@@ -71,9 +56,6 @@ const SignUpPage = (props) => {
 
   return (
     <SignUpPageContainer>
-
-      <MuiThemeProvider theme={MyTheme}>  
-
       <Header />
       <SignUpFormContainer onSubmit={goToPrivateArea} >
         <SignUpFormControl>
@@ -107,18 +89,17 @@ const SignUpPage = (props) => {
           />
         </SignUpFormControl>
         <SignUpButtonWrapper>
-
           <SignUpButton 
             type='submit' 
             size='small'
             variant="contained"
-            color="secondary">
-              Acessar
+            color="secondary"
+          >
+            Acessar
           </SignUpButton>
         </SignUpButtonWrapper>
       </SignUpFormContainer>
       <Footer />
-      </MuiThemeProvider>
     </SignUpPageContainer>
   )
 }
