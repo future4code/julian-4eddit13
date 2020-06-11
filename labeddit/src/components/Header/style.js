@@ -4,6 +4,11 @@ import {
 } from '@material-ui/core';
 
 export const HeaderContainer = styled.header`
+  height: 100px;
+  display: flex;
+  align-items: center;
+    color: black;
+    background-color: #ff9800 ;
 `
 export const HeaderWrapper = styled.div`
   width: 90%;

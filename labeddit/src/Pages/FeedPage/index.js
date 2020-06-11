@@ -13,6 +13,8 @@ import axios from 'axios';
 
 const FeedPage = (props) => {
 
+  usePrivatePage();
+
   const [postsList, setPostsList] = useState([]);
 
   const baseUrl = useContext(UrlContext);

@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../img/labeddit.png';
+import logo from '../../img/labeddit2.png';
 import { useHistory } from 'react-router-dom';
 import {
   HeaderContainer, 
@@ -31,12 +31,12 @@ const Header = () => {
       <HeaderWrapper>
         <ImageLogo src={logo} alt='logo' onClick={goToFeedPage} />
         <HeaderMenuWrapper>
-          {token ? (
+          {token && (
             <div>
               <p>Olá, {username}</p>
               <HeaderButton onClick={logOut} >Logout</HeaderButton>
             </div>
-          ) : null}
+          )}
         </HeaderMenuWrapper>
       </HeaderWrapper>
     </HeaderContainer>
