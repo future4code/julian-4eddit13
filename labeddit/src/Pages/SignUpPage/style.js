@@ -22,6 +22,9 @@ export const SignUpTextField = styled(TextField)`
 `
 export const SignUpFormControl = styled(FormControl)`
   width: 250px;
+  && {
+    margin: .5em;
+  }
 `
 export const SignUpButtonWrapper = styled.div`
   display: flex;

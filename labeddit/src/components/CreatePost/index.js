@@ -9,22 +9,8 @@ import {
 } from './style';
 import { useForm } from '../../hooks/useForm';
 import { UrlContext } from '../../contexts/UrlContext';
+import { RefreshContext } from '../../contexts/RefreshContext';
 import axios from 'axios';
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-
-
-const MyTheme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#71EB1E",
-    },
-    secondary: {
-      main: "#ff9800",
-    },
-  },
-});
-
 
 const CreatePost = (props) => {
   
@@ -43,13 +29,12 @@ const CreatePost = (props) => {
 
   const baseUrl = useContext(UrlContext);
 
+  const { refresh, setRefresh } = useContext(RefreshContext);
+
   const addPost = (event) => {
     event.preventDefault();
     const token = window.localStorage.getItem('token');
-    const body = {
-      'title': title,
-      'text': text
-    }
+    const body = { title, text }
     axios.post(`${baseUrl}/posts`, body, {
       headers: {  
         Authorization: token
@@ -57,6 +42,7 @@ const CreatePost = (props) => {
     })
     .then(response => {
       console.log(response);
+      setRefresh(!refresh);
       resetForm();
     })
     .catch(error => {
@@ -66,7 +52,6 @@ const CreatePost = (props) => {
 
   return (
     <CreatePostContainer onSubmit={addPost} >
-      <MuiThemeProvider theme={MyTheme}>
       <CreatePostWrapper>
         <CreatePostFormControl>
           <CreatePostTittle 
@@ -75,6 +60,8 @@ const CreatePost = (props) => {
             value={title}
             label='Título do post'
             onChange={handleInputChange}
+            variant='outlined'
+            require
           />
         </CreatePostFormControl>
         <CreatePostFormControl>
@@ -84,17 +71,19 @@ const CreatePost = (props) => {
             value={text}
             label='Escreva seu post'
             onChange={handleInputChange}
+            variant='outlined'
+            require
           />
         </CreatePostFormControl>
-      </CreatePostWrapper>
-      <CreatePostButton 
-            size='small'
-            variant="contained"
-            color="secondary"
-            type='submit' >
-            Publicar
+        <CreatePostButton 
+          size='small'
+          variant="contained"
+          color="secondary"
+          type='submit' 
+        >
+          Publicar
         </CreatePostButton>
-      </MuiThemeProvider>
+      </CreatePostWrapper>
     </CreatePostContainer>
   )
 }

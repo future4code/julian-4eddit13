@@ -9,19 +9,18 @@ import PostCard from '../../components/PostCard';
 import CreatePost from '../../components/CreatePost';
 import { usePrivatePage } from '../../hooks/usePrivatePage';
 import { UrlContext } from '../../contexts/UrlContext';
+import { RefreshContext } from '../../contexts/RefreshContext';
 import axios from 'axios';
 
-const FeedPage = (props) => {
+const FeedPage = () => {
 
   usePrivatePage();
 
   const [postsList, setPostsList] = useState([]);
 
-  const [refresh, setRefresh] = useState(false) // Variável que altera que chama a requisição do useEffect quando o botão de like e deslike é clicado.
-
-  const refreshArray = [refresh, setRefresh];
-
   const baseUrl = useContext(UrlContext);
+
+  const { refresh } = useContext(RefreshContext);
 
   useEffect(() => {
     const token = window.localStorage.getItem('token');
@@ -43,7 +42,7 @@ const FeedPage = (props) => {
       <Header />
       <FeedPageWrapper>
         <CreatePost />
-        {postsList.map(post => (<PostCard key={post.id} post={post} refreshArray={refreshArray} />))}
+        {postsList.map(post => (<PostCard key={post.id} post={post} />))}
       </FeedPageWrapper>
       <Footer />
     </FeedPageContainer>

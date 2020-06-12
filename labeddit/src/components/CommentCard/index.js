@@ -8,18 +8,20 @@ import {
   ThumbUpIcon,
   ThumbDownIcon
 } from './style';
+import { useFormatDate } from '../../hooks/useFormatDate';
 import { UrlContext } from '../../contexts/UrlContext';
+import { RefreshContext } from '../../contexts/RefreshContext';
 import axios from 'axios';
 
 const CommentCard = (props) => {
 
   const { id, text, username, votesCount, userVoteDirection, createdAt } = props.comment;
 
-  const [refresh, setRefresh] = props.refreshArray;
-
   const baseUrl = useContext(UrlContext);
 
-  const addVote = direction => {
+  const { refresh, setRefresh } = useContext(RefreshContext);
+
+  const addComment = direction => {
     const token = window.localStorage.getItem('token'); 
     const body = {
       "direction": (userVoteDirection === 0 ? direction : direction - userVoteDirection)
@@ -42,10 +44,11 @@ const CommentCard = (props) => {
     <CommentCardContainer>
       <CommentCardTitle>{username}</CommentCardTitle>
       <p>{text}</p>
+      <p>{useFormatDate(createdAt)}</p>
       <CommentCardInteractionWrapper>
         <CommentCardVoteWrapper>
           <CommentCardIconButton 
-            onClick={() => addVote(-1)}
+            onClick={() => addComment(-1)}
             size='small'
             color='secondary'
           >
@@ -53,7 +56,7 @@ const CommentCard = (props) => {
           </CommentCardIconButton>
           {votesCount}
           <CommentCardIconButton 
-            onClick={() => addVote(1)}
+            onClick={() => addComment(1)}
             size='small'
             color='primary'
           >

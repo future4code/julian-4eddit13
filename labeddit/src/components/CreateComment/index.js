@@ -8,6 +8,7 @@ import {
 } from './style';
 import { useForm } from '../../hooks/useForm';
 import { UrlContext } from '../../contexts/UrlContext';
+import { RefreshContext } from '../../contexts/RefreshContext';
 import axios from 'axios';
 
 const CreateComment = (props) => {
@@ -26,19 +27,21 @@ const CreateComment = (props) => {
 
   const baseUrl = useContext(UrlContext);
 
-  const addPost = (event) => {
+  const { refresh, setRefresh } = useContext(RefreshContext);
+
+  const addComment = (event) => {
     event.preventDefault();
     const token = window.localStorage.getItem('token');
-    const body = {
-      'text': text
-    }
-    axios.post(`${baseUrl}/posts/${props.postId}`, body, {
+    const body = { text }
+    console.log(token, body, props.postId)
+    axios.post(`${baseUrl}/posts/${props.postId}/comment`, body, {
       headers: {  
         Authorization: token
       }
     })
     .then(response => {
       console.log(response);
+      setRefresh(!refresh);
       resetForm();
     })
     .catch(error => {
@@ -47,7 +50,7 @@ const CreateComment = (props) => {
   }
 
   return (
-    <CreateCommentContainer onSubmit={addPost} >
+    <CreateCommentContainer onSubmit={addComment} >
       <CreateCommentWrapper>
         <CreateCommentFormControl>
           <CreateCommentTextfield 
@@ -55,6 +58,8 @@ const CreateComment = (props) => {
             value={text}
             label='Escreva seu comentário'
             onChange={handleInputChange}
+            variant='outlined'
+            require
           />
         </CreateCommentFormControl>
         <CreateCommentButton type='submit' >Comentar</CreateCommentButton>

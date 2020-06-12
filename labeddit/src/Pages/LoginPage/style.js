@@ -22,6 +22,9 @@ export const LoginTextField = styled(TextField)`
 `
 export const LoginFormControl = styled(FormControl)`
   width: 250px;
+  && {
+    margin: .5em;
+  }
 `
 export const LoginButtonWrapper = styled.div`
   display: flex;

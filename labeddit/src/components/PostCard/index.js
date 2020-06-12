@@ -10,22 +10,24 @@ import {
   ThumbUpIcon,
   ThumbDownIcon
 } from './style';
+import { useFormatDate } from '../../hooks/useFormatDate';
 import { UrlContext } from '../../contexts/UrlContext';
+import { RefreshContext } from '../../contexts/RefreshContext';
 import axios from 'axios';
 
 const PostCard = (props) => {
   
   const { id, title, text, username, votesCount, commentsCount, userVoteDirection, createdAt } = props.post;
 
-  const [refresh, setRefresh] = props.refreshArray;
+  const baseUrl = useContext(UrlContext);
+
+  const { refresh, setRefresh } = useContext(RefreshContext);
 
   const history = useHistory();
 
   const goToPostPage = (postId) => {
     history.push(`/${postId}`);
   }
-
-  const baseUrl = useContext(UrlContext);
 
   const addVote = direction => {
     const token = window.localStorage.getItem('token'); 
@@ -48,9 +50,10 @@ const PostCard = (props) => {
 
   return (
 
-    <PostCardContainer >
+    <PostCardContainer>
       <PostCardTitle onClick={() => goToPostPage(id)} >{username} - {title}</PostCardTitle>
       <p>{text}</p>
+      <p>{useFormatDate(createdAt)}</p>
       <PostCardInteractionWrapper>
         <PostCardVoteWrapper>
           <PostCardIconButton 
