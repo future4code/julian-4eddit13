@@ -43,10 +43,7 @@ const LoginPage = (props) => {
 
   const goToPrivateArea = (event) => {
     event.preventDefault();
-    const body = {
-      'email': email,
-      'password': password
-    }
+    const body = { email, password }
     axios.post(`${baseUrl}/login`, body)
     .then(response => {
       window.localStorage.setItem('token', response.data.token);
@@ -76,6 +73,8 @@ const LoginPage = (props) => {
             label={'E-mail'}
             onChange={handleInputChange}
             type='email'
+            variant='outlined'
+            required
           />
         </LoginFormControl>
         <LoginFormControl>
@@ -86,6 +85,8 @@ const LoginPage = (props) => {
             label={'Senha'}
             onChange={handleInputChange}
             type='password'
+            variant='outlined'
+            required
           />
         </LoginFormControl>
         <LoginButtonWrapper>
@@ -103,7 +104,6 @@ const LoginPage = (props) => {
           >
             Cadastrar
           </LoginButton>
-          
         </LoginButtonWrapper>
       </LoginFormContainer>
       <Footer />

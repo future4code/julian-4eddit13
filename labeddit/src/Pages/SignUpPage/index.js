@@ -36,11 +36,7 @@ const SignUpPage = (props) => {
 
   const goToPrivateArea = (event) => {
     event.preventDefault();
-    const body = {
-      'email': email,
-      'password': password,
-      'username': username
-    }
+    const body = { email, password, username }
     axios.post(`${baseUrl}/signup`, body)
     .then(response => {
       window.localStorage.setItem('token', response.data.token);
@@ -66,6 +62,8 @@ const SignUpPage = (props) => {
             label={'Nome de usuário'}
             onChange={handleInputChange}
             type='text'
+            variant='outlined'
+            required
           />
         </SignUpFormControl>
         <SignUpFormControl>
@@ -76,6 +74,8 @@ const SignUpPage = (props) => {
             label={'E-mail'}
             onChange={handleInputChange}
             type='email'
+            variant='outlined'
+            required
           />
         </SignUpFormControl>
         <SignUpFormControl>
@@ -86,6 +86,8 @@ const SignUpPage = (props) => {
             label={'Senha'}
             onChange={handleInputChange}
             type='password'
+            variant='outlined'
+            required
           />
         </SignUpFormControl>
         <SignUpButtonWrapper>

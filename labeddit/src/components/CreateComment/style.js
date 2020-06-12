@@ -8,7 +8,7 @@ import {
 export const CreateCommentContainer = styled.form`
 `
 export const CreateCommentWrapper = styled.div`
-  width: 400px;
+  width: 500px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -16,6 +16,9 @@ export const CreateCommentWrapper = styled.div`
 `
 export const CreateCommentFormControl = styled(FormControl)`
   width: 100%;
+  && {
+    margin: .5em;
+  }
 `
 export const CreateCommentTextfield = styled(TextField)`
 `

@@ -13,6 +13,9 @@ export const PostCardContainer = styled(Card)`
   width: 500px;
   margin: 1em;
   padding: 1em;
+  > p:last-of-type {
+    font-size: .75em;
+  }
 `
 export const PostCardTitle = styled.h3`
   cursor: pointer;
@@ -21,6 +24,7 @@ export const PostCardInteractionWrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 export const PostCardVoteWrapper = styled.div`
 `
