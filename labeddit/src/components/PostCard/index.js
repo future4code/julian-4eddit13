@@ -32,7 +32,7 @@ const PostCard = (props) => {
   const addVote = direction => {
     const token = window.localStorage.getItem('token'); 
     const body = {
-      "direction": (userVoteDirection === 0 ? direction : direction - userVoteDirection)
+      "direction": (!userVoteDirection ? direction : direction - userVoteDirection)
     }
     axios.put(`${baseUrl}/posts/${id}/vote`, body, {
       headers: {

@@ -30,12 +30,20 @@ const FeedPage = () => {
       }
     })
     .then(response => {
-      setPostsList(response.data.posts);
+      setPostsList(sortList(response.data.posts));
     })
     .catch(error => {
       console.log(error);
     })
-  }, [setPostsList, baseUrl, refresh])
+  }, [setPostsList, baseUrl, refresh]);
+
+  const sortList = (list) => {
+    let newList = list;
+    newList = [].concat(list).sort((a, b) => {
+      return a.createdAt > b.createdAt ? -1 : (a.createdAt < b.createdAt ? 1 : 0);
+    });
+    return newList;
+  }
 
   return (
     <FeedPageContainer>
