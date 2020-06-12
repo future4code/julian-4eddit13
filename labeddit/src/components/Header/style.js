@@ -25,7 +25,7 @@ export const HeaderMenuWrapper = styled.div`
 `
 export const ImageLogo = styled.img`
   cursor: pointer;
-  width: 100px;
+  width: 200px;
 `
 export const HeaderButton = styled(Button)`
 `

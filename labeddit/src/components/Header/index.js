@@ -33,7 +33,7 @@ const Header = () => {
         <HeaderMenuWrapper>
           {token && (
             <div>
-              <p>Olá, {username}</p>
+              <p>Olá {username}</p>
               <HeaderButton onClick={logOut} >Logout</HeaderButton>
             </div>
           )}

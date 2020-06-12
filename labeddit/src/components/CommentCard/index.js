@@ -24,7 +24,7 @@ const CommentCard = (props) => {
   const addComment = direction => {
     const token = window.localStorage.getItem('token'); 
     const body = {
-      "direction": (userVoteDirection === 0 ? direction : direction - userVoteDirection)
+      "direction": (!userVoteDirection ? direction : direction - userVoteDirection)
     }
     axios.put(`${baseUrl}/posts/${props.postId}/comments/${id}/vote`, body, {
       headers: {

@@ -26,8 +26,6 @@ const PostPage = () => {
 
   const { refresh } = useContext(RefreshContext);
 
-  const { comments } = postDetail;
-
   useEffect(() => {
     const token = window.localStorage.getItem('token');
     axios.get(`${baseUrl}/posts/${pathParams.postId}`, {
@@ -36,12 +34,20 @@ const PostPage = () => {
       }
     })
     .then(response => {
-      setPostDetail(response.data.post);
+      setPostDetail({ ...response.data.post, comments: sortList(response.data.post.comments) });
     })
     .catch(error => {
       console.log(error);
     })
-  }, [baseUrl, setPostDetail, pathParams.postId, refresh])
+  }, [baseUrl, setPostDetail, pathParams.postId, refresh]);
+
+  const sortList = (list) => {
+    let newList = list;
+    newList = [].concat(list).sort((a, b) => {
+      return a.createdAt > b.createdAt ? -1 : (a.createdAt < b.createdAt ? 1 : 0);
+    });
+    return newList;
+  }
 
   return (
     <PostPageContainer>
@@ -49,7 +55,7 @@ const PostPage = () => {
       <PostPageWrapper>
         <PostCard post={postDetail} />
         <CreateComment postId={pathParams.postId} />
-        {(comments || []).map(comment => (
+        {(postDetail.comments || []).map(comment => (
           <CommentCard key={comment.id} comment={comment} postId={pathParams.postId} />
         ))}
       </PostPageWrapper>
