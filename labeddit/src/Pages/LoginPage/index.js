@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   LoginPageContainer,
@@ -10,11 +10,16 @@ import {
 } from './style';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { useForm } from '../../hooks/useForm';
-import { UrlContext } from '../../contexts/UrlContext';
+import { 
+  useForm,
+  useFeedPage 
+} from '../../hooks/hooks';
+import { UrlContext } from '../../contexts/contexts';
 import axios from 'axios';
 
-const LoginPage = (props) => {
+const LoginPage = () => {
+
+  useFeedPage();
 
   const { form, onChange, resetForm } = useForm({
     email: '',
@@ -32,14 +37,6 @@ const LoginPage = (props) => {
   const history = useHistory();
 
   const baseUrl = useContext(UrlContext);
-
-  useEffect(() => {
-    const token = window.localStorage.getItem('token');
-
-    if (token) {
-      history.push('/home');
-    }
-  }, [history]);
 
   const goToPrivateArea = (event) => {
     event.preventDefault();

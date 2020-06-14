@@ -10,11 +10,16 @@ import {
 } from '@material-ui/icons';
 
 export const CommentCardContainer = styled(Card)`
-  width: 500px;
   margin: 1em;
   padding: 1em;
   > p:last-of-type {
     font-size: .75em;
+  }
+  @media screen and (min-width: 560px) {
+    width: 500px;
+  }
+  @media screen and (max-width: 560px) {
+    width: 80%;
   }
 `
 export const CommentCardTitle = styled.h3`

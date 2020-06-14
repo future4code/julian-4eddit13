@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import { UrlContext } from './contexts/UrlContext';
-import { RefreshContext } from './contexts/RefreshContext';
 import Router from './Router';
+import { 
+  UrlContext,
+  RefreshContext,
+  SearchContext
+} from './contexts/contexts'
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
 const MyTheme = createMuiTheme({
@@ -19,14 +22,20 @@ const App = () => {
 
   const [refresh, setRefresh] = useState(false);
 
+  const [search, setSearch] = useState('');
+
   const refreshValue = { refresh, setRefresh };
+
+  const searchValue = { search, setSearch };
 
   return (
     <UrlContext.Provider value={'https://us-central1-labenu-apis.cloudfunctions.net/labEddit'} >
       <RefreshContext.Provider value={refreshValue} >
-        <MuiThemeProvider theme={MyTheme}>
-          <Router />
-        </MuiThemeProvider>
+        <SearchContext.Provider value={searchValue} >
+          <MuiThemeProvider theme={MyTheme}>
+            <Router />
+          </MuiThemeProvider>
+        </SearchContext.Provider>
       </RefreshContext.Provider>
     </UrlContext.Provider>
   );

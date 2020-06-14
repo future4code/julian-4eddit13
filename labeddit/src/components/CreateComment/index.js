@@ -6,9 +6,11 @@ import {
   CreateCommentTextfield,
   CreateCommentButton
 } from './style';
-import { useForm } from '../../hooks/useForm';
-import { UrlContext } from '../../contexts/UrlContext';
-import { RefreshContext } from '../../contexts/RefreshContext';
+import { useForm } from '../../hooks/hooks';
+import {
+  UrlContext,
+  RefreshContext
+} from '../../contexts/contexts';
 import axios from 'axios';
 
 const CreateComment = (props) => {
@@ -59,7 +61,7 @@ const CreateComment = (props) => {
             label='Escreva seu comentário'
             onChange={handleInputChange}
             variant='outlined'
-            require
+            required
           />
         </CreateCommentFormControl>
         <CreateCommentButton type='submit' >Comentar</CreateCommentButton>

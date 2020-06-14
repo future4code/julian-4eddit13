@@ -7,9 +7,11 @@ import {
   CreatePostButton,
   CreatePostTittle
 } from './style';
-import { useForm } from '../../hooks/useForm';
-import { UrlContext } from '../../contexts/UrlContext';
-import { RefreshContext } from '../../contexts/RefreshContext';
+import { useForm } from '../../hooks/hooks';
+import {
+  UrlContext,
+  RefreshContext
+} from '../../contexts/contexts';
 import axios from 'axios';
 
 const CreatePost = (props) => {
@@ -61,7 +63,7 @@ const CreatePost = (props) => {
             label='Título do post'
             onChange={handleInputChange}
             variant='outlined'
-            require
+            required
           />
         </CreatePostFormControl>
         <CreatePostFormControl>
@@ -72,7 +74,7 @@ const CreatePost = (props) => {
             label='Escreva seu post'
             onChange={handleInputChange}
             variant='outlined'
-            require
+            required
           />
         </CreatePostFormControl>
         <CreatePostButton 

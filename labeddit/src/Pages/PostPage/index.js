@@ -9,9 +9,11 @@ import Footer from '../../components/Footer';
 import PostCard from '../../components/PostCard';
 import CommentCard from '../../components/CommentCard';
 import CreateComment from '../../components/CreateComment';
-import { usePrivatePage } from '../../hooks/usePrivatePage';
-import { UrlContext } from '../../contexts/UrlContext';
-import { RefreshContext } from '../../contexts/RefreshContext';
+import { usePrivatePage } from '../../hooks/hooks';
+import {
+  UrlContext,
+  RefreshContext
+} from '../../contexts/contexts';
 import axios from 'axios';
 
 const PostPage = () => {

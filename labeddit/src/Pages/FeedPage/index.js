@@ -7,9 +7,12 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PostCard from '../../components/PostCard';
 import CreatePost from '../../components/CreatePost';
-import { usePrivatePage } from '../../hooks/usePrivatePage';
-import { UrlContext } from '../../contexts/UrlContext';
-import { RefreshContext } from '../../contexts/RefreshContext';
+import { usePrivatePage } from '../../hooks/hooks';
+import {
+  UrlContext,
+  RefreshContext,
+  SearchContext
+} from '../../contexts/contexts';
 import axios from 'axios';
 
 const FeedPage = () => {
@@ -21,6 +24,8 @@ const FeedPage = () => {
   const baseUrl = useContext(UrlContext);
 
   const { refresh } = useContext(RefreshContext);
+
+  const { search } = useContext(SearchContext);
 
   useEffect(() => {
     const token = window.localStorage.getItem('token');
@@ -45,12 +50,26 @@ const FeedPage = () => {
     return newList;
   }
 
+  const searchPosts = () => {
+    let newList = postsList;
+    if (search) {
+      newList = newList.filter(post => {
+        return (
+          post.title.toLowerCase().includes(search.toLowerCase()) || 
+          post.text.toLowerCase().includes(search.toLowerCase()) ||
+          post.username.toLowerCase().includes(search.toLowerCase())
+        )
+      })
+    }
+    return newList;
+  }
+
   return (
     <FeedPageContainer>
       <Header />
       <FeedPageWrapper>
         <CreatePost />
-        {postsList.map(post => (<PostCard key={post.id} post={post} />))}
+        {searchPosts().map(post => (<PostCard key={post.id} post={post} />))}
       </FeedPageWrapper>
       <Footer />
     </FeedPageContainer>
