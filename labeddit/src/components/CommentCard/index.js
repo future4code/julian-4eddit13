@@ -26,7 +26,7 @@ const CommentCard = (props) => {
   const addComment = direction => {
     const token = window.localStorage.getItem('token'); 
     const body = {
-      "direction": (!userVoteDirection ? direction : direction - userVoteDirection)
+      "direction": (!userVoteDirection === direction ? 0 : direction)
     }
     axios.put(`${baseUrl}/posts/${props.postId}/comments/${id}/vote`, body, {
       headers: {
@@ -52,7 +52,7 @@ const CommentCard = (props) => {
           <CommentCardIconButton 
             onClick={() => addComment(-1)}
             size='small'
-            color='secondary'
+            color={userVoteDirection === -1 ? 'secondary' : 'default'}
           >
             <ThumbDownIcon />
           </CommentCardIconButton>
@@ -60,7 +60,7 @@ const CommentCard = (props) => {
           <CommentCardIconButton 
             onClick={() => addComment(1)}
             size='small'
-            color='primary'
+            color={userVoteDirection === 1 ? 'primary' : 'default'}
           >
             <ThumbUpIcon />
           </CommentCardIconButton>

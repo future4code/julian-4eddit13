@@ -7,6 +7,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import PostCard from '../../components/PostCard';
 import CreatePost from '../../components/CreatePost';
+import Loading from '../../components/Loading';
 import { usePrivatePage } from '../../hooks/hooks';
 import {
   UrlContext,
@@ -19,7 +20,7 @@ const FeedPage = () => {
 
   usePrivatePage();
 
-  const [postsList, setPostsList] = useState([]);
+  const [postsList, setPostsList] = useState(undefined);
 
   const baseUrl = useContext(UrlContext);
 
@@ -67,10 +68,14 @@ const FeedPage = () => {
   return (
     <FeedPageContainer>
       <Header />
-      <FeedPageWrapper>
-        <CreatePost />
-        {searchPosts().map(post => (<PostCard key={post.id} post={post} />))}
-      </FeedPageWrapper>
+      {postsList ? (
+        <FeedPageWrapper>
+          <CreatePost />
+          {searchPosts().map(post => (<PostCard key={post.id} post={post} />))}
+        </FeedPageWrapper>
+      ) : 
+        <Loading />
+      }
       <Footer />
     </FeedPageContainer>
   )

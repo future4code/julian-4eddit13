@@ -9,6 +9,7 @@ import Footer from '../../components/Footer';
 import PostCard from '../../components/PostCard';
 import CommentCard from '../../components/CommentCard';
 import CreateComment from '../../components/CreateComment';
+import Loading from '../../components/Loading';
 import { usePrivatePage } from '../../hooks/hooks';
 import {
   UrlContext,
@@ -20,7 +21,7 @@ const PostPage = () => {
 
   usePrivatePage();
 
-  const [postDetail, setPostDetail] = useState({});
+  const [postDetail, setPostDetail] = useState(undefined);
 
   const pathParams = useParams();
 
@@ -54,13 +55,17 @@ const PostPage = () => {
   return (
     <PostPageContainer>
       <Header />
-      <PostPageWrapper>
-        <PostCard post={postDetail} />
-        <CreateComment postId={pathParams.postId} />
-        {(postDetail.comments || []).map(comment => (
-          <CommentCard key={comment.id} comment={comment} postId={pathParams.postId} />
-        ))}
-      </PostPageWrapper>
+      {postDetail ? (
+        <PostPageWrapper>
+          <PostCard post={postDetail} />
+          <CreateComment postId={pathParams.postId} />
+          {postDetail.comments.map(comment => (
+            <CommentCard key={comment.id} comment={comment} postId={pathParams.postId} />
+          ))}
+        </PostPageWrapper>
+      ) : 
+        <Loading />
+      }
       <Footer />
     </PostPageContainer>
   )

@@ -14,7 +14,7 @@ import {
 } from '../../contexts/contexts';
 import axios from 'axios';
 
-const CreatePost = (props) => {
+const CreatePost = () => {
   
   const { form, onChange, resetForm } = useForm({
     text: '',

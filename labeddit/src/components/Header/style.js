@@ -35,6 +35,9 @@ export const HeaderWrapper = styled.div`
   }
 `
 export const HeaderMenuWrapper = styled.div`
+  @media screen and (min-width: 560px) {
+    grid-column: 3 / span 1;
+  }
   @media screen and (max-width: 560px) {
     grid-row: 1 / span 1;
     grid-column: 2 / span 1;

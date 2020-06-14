@@ -34,7 +34,7 @@ const PostCard = (props) => {
   const addVote = direction => {
     const token = window.localStorage.getItem('token'); 
     const body = {
-      "direction": (!userVoteDirection ? direction : direction - userVoteDirection)
+      "direction": (userVoteDirection === direction ? 0 : direction)
     }
     axios.put(`${baseUrl}/posts/${id}/vote`, body, {
       headers: {
@@ -63,7 +63,7 @@ const PostCard = (props) => {
           <PostCardIconButton 
             onClick={() => addVote(-1)}
             size='small'
-            color='secondary'
+            color={userVoteDirection === -1 ? 'secondary' : 'default'}
           >
             <ThumbDownIcon />
           </PostCardIconButton>
@@ -71,7 +71,7 @@ const PostCard = (props) => {
           <PostCardIconButton 
             onClick={() => addVote(1)}
             size='small'
-            color='primary'
+            color={userVoteDirection === 1 ? 'primary' : 'default'}
           >
             <ThumbUpIcon />
           </PostCardIconButton>
