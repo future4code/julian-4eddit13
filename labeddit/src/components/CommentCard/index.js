@@ -8,9 +8,11 @@ import {
   ThumbUpIcon,
   ThumbDownIcon
 } from './style';
-import { useFormatDate } from '../../hooks/useFormatDate';
-import { UrlContext } from '../../contexts/UrlContext';
-import { RefreshContext } from '../../contexts/RefreshContext';
+import { useFormatDate } from '../../hooks/hooks';
+import {
+  UrlContext,
+  RefreshContext
+} from '../../contexts/contexts';
 import axios from 'axios';
 
 const CommentCard = (props) => {

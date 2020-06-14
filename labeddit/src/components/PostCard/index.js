@@ -10,9 +10,11 @@ import {
   ThumbUpIcon,
   ThumbDownIcon
 } from './style';
-import { useFormatDate } from '../../hooks/useFormatDate';
-import { UrlContext } from '../../contexts/UrlContext';
-import { RefreshContext } from '../../contexts/RefreshContext';
+import { useFormatDate } from '../../hooks/hooks';
+import {
+  UrlContext,
+  RefreshContext
+} from '../../contexts/contexts';
 import axios from 'axios';
 
 const PostCard = (props) => {
@@ -51,7 +53,9 @@ const PostCard = (props) => {
   return (
 
     <PostCardContainer>
-      <PostCardTitle onClick={() => goToPostPage(id)} >{username} - {title}</PostCardTitle>
+      {history.location.pathname === '/home' ? 
+        <PostCardTitle onClick={() => goToPostPage(id)} style={{ cursor: 'pointer' }} >{username} - {title}</PostCardTitle> :
+        <PostCardTitle>{username} - {title}</PostCardTitle> }
       <p>{text}</p>
       <p>{useFormatDate(createdAt)}</p>
       <PostCardInteractionWrapper>
@@ -73,7 +77,7 @@ const PostCard = (props) => {
           </PostCardIconButton>
         </PostCardVoteWrapper>
         <PostCardCommentWrapper>
-          {commentsCount} {commentsCount > 1 ? 'Comentários' : 'Comentário'}
+          {commentsCount} {commentsCount !== 1 ? 'Comentários' : 'Comentário'}
         </PostCardCommentWrapper>
       </PostCardInteractionWrapper>
     </PostCardContainer>

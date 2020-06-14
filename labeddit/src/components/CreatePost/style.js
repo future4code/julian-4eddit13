@@ -6,13 +6,21 @@ import {
 } from '@material-ui/core';
 
 export const CreatePostContainer = styled.form`
+  @media screen and (max-width: 560px) {
+    width: 100%;
+  }
 `
 export const CreatePostWrapper = styled.div`
-  width: 500px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media screen and (min-width: 560px) {
+    width: 500px;
+  }
+  @media screen and (max-width: 560px) {
+    width: 80%;
+  }
 `
 export const CreatePostFormControl = styled(FormControl)`
   width: 100%;

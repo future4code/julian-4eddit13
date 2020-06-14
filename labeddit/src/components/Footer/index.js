@@ -7,7 +7,9 @@ import {
 const Footer = () => {
   return (
     <FooterContainer>
-      Footer
+      <div>
+        {`© 2020 - ${(new Date()).getFullYear()}, Todos os direitos reservados`}
+      </div>
     </FooterContainer>
   )
 }
