@@ -23,7 +23,6 @@ export const CommentCardContainer = styled(Card)`
   }
 `
 export const CommentCardTitle = styled.h3`
-  cursor: pointer;
 `
 export const CommentCardInteractionWrapper = styled.div`
   width: 100%;
